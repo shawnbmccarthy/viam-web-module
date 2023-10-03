@@ -9,9 +9,10 @@ jobs:
     steps:
       - name: get_artifacts
         if: github.event_name == 'release'
-        run: echo ${{github.ref_name}} #wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz
+        run: wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz
       - uses: actions/checkout@v3
       - name: build
+        if: github.event_name == 'release'
         run: tar -czf module.tar.gz main.py requirements.txt run.sh components ${{github.ref_name}}.tar.gz
       - uses: viamrobotics/upload-module@v1
         if: github.event_name == 'release'
