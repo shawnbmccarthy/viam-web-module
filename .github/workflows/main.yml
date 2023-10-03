@@ -8,39 +8,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: get_artifacts
-        run: wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/v0.0.1.tar.gz
-#      - uses: actions/checkout@v3
-#      - name: build
-#        run: tar -czf module.tar.gz main.py requirements.txt run.sh components web-src.tar.gz
-#      - uses: viamrobotics/upload-module@v1
-#        if: github.event_name == 'release'
-#        with:
-#          module-path: module.tar.gz
-#          platform: linux/amd64 
-#          version: ${{ github.event_name == 'release' && github.ref_name || format('0.0.0-{0}.{1}', github.ref_name, github.run_number) }} # <-- see 'Versioning' section below for explanation
-#          key-id: ${{ secrets.viam_key_id }}
-#          key-value: ${{ secrets.viam_key_value }}
-#      - uses: viamrobotics/upload-module@v1
-#        if: github.event_name == 'release'
-#        with:
-#          module-path: module.tar.gz
-#          platform: linux/arm64 
-#          version: ${{ github.event_name == 'release' && github.ref_name || format('0.0.0-{0}.{1}', github.ref_name, github.run_number) }} # <-- see 'Versioning' section below for explanation
-#          key-id: ${{ secrets.viam_key_id }}
-#          key-value: ${{ secrets.viam_key_value }}
-#      - uses: viamrobotics/upload-module@v1
-#        if: github.event_name == 'release'
-#        with:
-#          module-path: module.tar.gz
-#          platform: darwin/arm64 
-#          version: ${{ github.event_name == 'release' && github.ref_name || format('0.0.0-{0}.{1}', github.ref_name, github.run_number) }} # <-- see 'Versioning' section below for explanation
-#          key-id: ${{ secrets.viam_key_id }}
-#          key-value: ${{ secrets.viam_key_value }}
-#      - uses: viamrobotics/upload-module@v1
-#        if: github.event_name == 'release'
-#        with:
-#          module-path: module.tar.gz
-#          platform: darwin/amd64 
-#          version: ${{ github.event_name == 'release' && github.ref_name || format('0.0.0-{0}.{1}', github.ref_name, github.run_number) }} # <-- see 'Versioning' section below for explanation
-#          key-id: ${{ secrets.viam_key_id }}
-#          key-value: ${{ secrets.viam_key_value }}
+        if: github.event_name == 'release'
+        with:
+          run: echo ${{github.ref_name}} #wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz
+      - uses: actions/checkout@v3
+      - name: build
+        run: tar -czf module.tar.gz main.py requirements.txt run.sh components ${{github.ref_name}}.tar.gz
+      - uses: viamrobotics/upload-module@v1
+        if: github.event_name == 'release'
+        with:
+          module-path: module.tar.gz
+          platform: linux/amd64 
+          version: ${{ github.event_name == 'release' && github.ref_name || format('0.0.0-{0}.{1}', github.ref_name, github.run_number) }}
+          key-id: ${{ secrets.viam_key_id }}
+          key-value: ${{ secrets.viam_key_value }}
+      - uses: viamrobotics/upload-module@v1
+        if: github.event_name == 'release'
+        with:
+          module-path: module.tar.gz
+          platform: linux/arm64 
+          version: ${{ github.event_name == 'release' && github.ref_name || format('0.0.0-{0}.{1}', github.ref_name, github.run_number) }}
+          key-id: ${{ secrets.viam_key_id }}
+          key-value: ${{ secrets.viam_key_value }}
+      - uses: viamrobotics/upload-module@v1
+        if: github.event_name == 'release'
+        with:
+          module-path: module.tar.gz
+          platform: darwin/arm64 
+          version: ${{ github.event_name == 'release' && github.ref_name || format('0.0.0-{0}.{1}', github.ref_name, github.run_number) }}
+          key-id: ${{ secrets.viam_key_id }}
+          key-value: ${{ secrets.viam_key_value }}
+      - uses: viamrobotics/upload-module@v1
+        if: github.event_name == 'release'
+        with:
+          module-path: module.tar.gz
+          platform: darwin/amd64 
+          version: ${{ github.event_name == 'release' && github.ref_name || format('0.0.0-{0}.{1}', github.ref_name, github.run_number) }}
+          key-id: ${{ secrets.viam_key_id }}
+          key-value: ${{ secrets.viam_key_value }}
