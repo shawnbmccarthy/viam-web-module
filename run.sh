@@ -16,10 +16,12 @@ else
   echo "virtual environment exists, will not run setup"
 fi
 
-if [[ -f ${SCRIPT_DIR}/web_app.tar.gz ]]; then
+# start setup process
+source ${SCRIPT_DIR}/web_vars.sh
+WEB_NAME=${WEB_APP_NAME}-${WEB_APP_VERSION}
+
+if [[ -f ${SCRIPT_DIR}/${WB_NAME}.tar.gz ]]; then
   echo "found install, attempting install"
-  source ${SCRIPT_DIR}/web_vars.sh
-  WEB_NAME=${WEB_APP_NAME}-${WEB_APP_VERSION}
   tar -xf ${SCRIPT_DIR}/${WEB_NAME}.tar.gz -C ${WEB_APP_INSTALL_DIR}
   ${WEB_APP_INSTALL_DIR}/${WEB_NAME}/install.sh
   ${WEB_APP_INSTALL_DIR}/${WEB_NAME}/web.sh start
