@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: build
         if: github.event_name == 'release'
-        run: mv /tmp/web_* . && tar -czf module.tar.gz main.py requirements.txt run.sh components web_vars.sh web_app.tar.gz
+        run: mv /tmp/web*.sh . && tar -czf module.tar.gz main.py requirements.txt run.sh components web_vars.sh viam-web-demo-${{github.ref_name}}.tar.gz
       - uses: viamrobotics/upload-module@v1
         if: github.event_name == 'release'
         with:
