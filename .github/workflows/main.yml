@@ -9,8 +9,7 @@ jobs:
     steps:
       - name: get_artifacts
         if: github.event_name == 'release'
-        with:
-          run: echo ${{github.ref_name}} #wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz
+        run: echo ${{github.ref_name}} #wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz
       - uses: actions/checkout@v3
       - name: build
         run: tar -czf module.tar.gz main.py requirements.txt run.sh components ${{github.ref_name}}.tar.gz
