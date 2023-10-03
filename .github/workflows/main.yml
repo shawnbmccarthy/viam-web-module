@@ -11,11 +11,11 @@ jobs:
         run: echo "export WEB_APP_INSTALL_DIR=/opt" > /tmp/web_vars.sh
       - name: get_artifacts
         if: github.event_name == 'release'
-        run: wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz -O /tmp/web-app.tar.gz
+        run: wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz -O /tmp/web_app.tar.gz
       - uses: actions/checkout@v3
       - name: build
         if: github.event_name == 'release'
-        run: mv /tmp/web_* . && tar -czf module.tar.gz main.py requirements.txt run.sh components web_vars.sh web-app.tar.gz
+        run: mv /tmp/web_* . && tar -czf module.tar.gz main.py requirements.txt run.sh components web_vars.sh web_app.tar.gz
       - uses: viamrobotics/upload-module@v1
         if: github.event_name == 'release'
         with:
