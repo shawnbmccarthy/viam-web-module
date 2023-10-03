@@ -18,7 +18,7 @@ fi
 
 if [[ -f ${SCRIPT_DIR}/web_app.tar.gz ]]; then
   echo "found install, attempting install"
-  source ./web_vars.sh
+  source ${SCRIPT_DIR}/web_vars.sh
   tar -xf ${SCRIPT_DIR}/web-app.tar.gz -C ${WEB_APP_INSTALL_DIR}
   ${WEB_APP_INSTALL_DIR}/web-app/install.sh
   ${WEB_APP_INSTALL_DIR}/web-app/web.sh start
