@@ -11,7 +11,7 @@ jobs:
         uses: dsaltares/fetch-gh-release-asset@master
         with:
           repo: 'shawnbmccarthy/viam-web-demo'
-          version: 'tags/v0.0.1'
+          version: 'archive/refs/tags/v0.0.1'
           file: 'v0.0.1.tar.gz'
           target: 'web-src.tar.gz'
 #      - uses: actions/checkout@v3
