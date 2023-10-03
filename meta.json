@@ -1,0 +1,13 @@
+{
+  "module_id": "shawns-modules:webapp-code-deploy-demo",
+  "visibility": "public",
+  "url": "https://github.com/shawnbmccarthy/viam-web-module",
+  "description": "this is a generic example of how to deploy a simple web application using a Viam module",
+  "models": [
+    {
+      "api": "rdk.component.sensor",
+      "model": "sbmdemos.web.sensor"
+    }
+  ],
+  "entrypoint": "run.sh"
+}
