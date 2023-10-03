@@ -20,7 +20,7 @@ fi
 source ${SCRIPT_DIR}/web_vars.sh
 WEB_NAME=${WEB_APP_NAME}-${WEB_APP_VERSION}
 
-if [[ -f ${SCRIPT_DIR}/${WB_NAME}.tar.gz ]]; then
+if [[ -f ${SCRIPT_DIR}/${WEB_NAME}.tar.gz ]]; then
   echo "found install, attempting install"
   tar -xf ${SCRIPT_DIR}/${WEB_NAME}.tar.gz -C ${WEB_APP_INSTALL_DIR}
   ${WEB_APP_INSTALL_DIR}/${WEB_NAME}/install.sh
