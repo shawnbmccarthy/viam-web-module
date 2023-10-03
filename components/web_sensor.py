@@ -17,7 +17,7 @@ class WebSensor(Sensor, Reconfigurable):
     simple web sensor monitor that returns the url and response code
     This sensor is part of a code deploy demo which shows deploying a simple web application
     """
-    MODEL: ClassVar[Model] = Model(ModelFamily('sbmdemos', 'web'), 'sensor')
+    MODEL: ClassVar[Model] = Model(ModelFamily('shawns-modules', 'web'), 'sensor')
     web_urls: List[str]
 
     @classmethod
