@@ -1,16 +1,25 @@
-# This is a sample Python script.
+import asyncio
+import sys
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+from components import WebSensor
+from viam.components.sensor import Sensor
+from viam.module.module import Module
 
 
-# Press the green button in the gutter to run the script.
+async def main(addr: str) -> None:
+    """
+    Main entry into module, we will add our simple web_sensor for the web application
+    deployed in the demo
+
+    :param addr:
+    :return:
+    """
+    m = Module(addr)
+    m.add_model_from_registry(Sensor.SUBTYPE, WebSensor.MODEL)
+    await m.start()
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    if len(sys.argv) != 2:
+        raise Exception('need socket path as command line arg')
+    asyncio.run(main(sys.argv[1]))
