@@ -9,9 +9,14 @@ jobs:
     steps:
       - name: set_web_app_install_dir
         run: echo "export WEB_APP_INSTALL_DIR=/opt" > /tmp/web_vars.sh
+      - name: set_web_app_name
+        run: echo "export WEB_APP_NAME=viam-web-demo" >> /tmp/web_vars.sh
       - name: get_artifacts
         if: github.event_name == 'release'
-        run: wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz -O /tmp/web_app.tar.gz
+        run: wget https://github.com/shawnbmccarthy/viam-web-demo/archive/refs/tags/${{github.ref_name}}.tar.gz -O /tmp/viam-web-demo-${{github.ref_name}}.tar.gz
+      - name: set_web_app_verison
+        if: github.event_name == 'release'
+        run: echo "export WEB_APP_VERSION=${{github.ref_name}}" >> /tmp/web_vars.sh
       - uses: actions/checkout@v3
       - name: build
         if: github.event_name == 'release'

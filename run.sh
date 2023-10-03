@@ -19,10 +19,11 @@ fi
 if [[ -f ${SCRIPT_DIR}/web_app.tar.gz ]]; then
   echo "found install, attempting install"
   source ${SCRIPT_DIR}/web_vars.sh
-  tar -xf ${SCRIPT_DIR}/web-app.tar.gz -C ${WEB_APP_INSTALL_DIR}
-  ${WEB_APP_INSTALL_DIR}/web-app/install.sh
-  ${WEB_APP_INSTALL_DIR}/web-app/web.sh start
-  rm -rf ${SCRIPT_DIR}/web-app.tar.gz
+  WEB_NAME=${WEB_APP_NAME}-${WEB_APP_VERSION}
+  tar -xf ${SCRIPT_DIR}/${WEB_NAME}.tar.gz -C ${WEB_APP_INSTALL_DIR}
+  ${WEB_APP_INSTALL_DIR}/${WEB_NAME}/install.sh
+  ${WEB_APP_INSTALL_DIR}/${WEB_NAME}/web.sh start
+  rm -rf ${SCRIPT_DIR}/${WEB_NAME}.tar.gz
 fi
 
 exec "${SCRIPT_DIR}"/venv/bin/python3 "${SCRIPT_DIR}"/main.py "$@"
