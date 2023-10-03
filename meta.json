@@ -6,7 +6,7 @@
   "models": [
     {
       "api": "rdk:component:sensor",
-      "model": "shawms-modules:web:sensor"
+      "model": "shawns-modules:web:sensor"
     }
   ],
   "entrypoint": "run.sh"
